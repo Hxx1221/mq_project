@@ -42,11 +42,7 @@ public class produce {
         for (int i = 0; i < 20; i++) {
             channel.basicPublish(a, b, MessageProperties.PERSISTENT_TEXT_PLAIN, (bb+i).getBytes());
             TimeUnit.MILLISECONDS.sleep(500);
-
         }
-
-
-
         channel.close();
         connection.close();
     }

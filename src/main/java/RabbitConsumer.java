@@ -39,15 +39,17 @@ public class RabbitConsumer {
             public void handleDelivery(final String consumerTag, final Envelope envelope, final AMQP.BasicProperties properties, final byte[] body) throws IOException {
                 System.out.println(" recv  message:  " + new String(body));
                 try {
-                    TimeUnit.SECONDS.sleep(1);
+                    TimeUnit.MILLISECONDS.sleep(1);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
-                    channel.basicAck(envelope.getDeliveryTag(), false);
+//                    channel.basicAck(envelope.getDeliveryTag(), false);
+
                 }
+
             }
 
         };
-        channel.basicConsume(QUEUE_NAME, consumer);
+       channel.basicConsume(QUEUE_NAME,true, consumer);
         TimeUnit.SECONDS.sleep(5);
         channel.close();
         connection.close();
