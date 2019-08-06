@@ -14,7 +14,7 @@ import java.util.concurrent.TimeoutException;
 public class RabbitConsumer {
 
 
-    private static final String QUEUE_NAME = "queue_demo";
+    private static final String QUEUE_NAME = "queue_name";
 
     private static final String IP_ADDRESS = "106.12.33.235";
     private static final int PORT = 5672;
@@ -47,7 +47,7 @@ public class RabbitConsumer {
             }
 
         };
-        channel.basicConsume(QUEUE_NAME, consumer);
+        channel.basicConsume(QUEUE_NAME,true, consumer);
         TimeUnit.SECONDS.sleep(5);
         channel.close();
         connection.close();
