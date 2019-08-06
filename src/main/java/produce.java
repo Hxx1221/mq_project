@@ -1,4 +1,7 @@
-import com.rabbitmq.client.*;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.MessageProperties;
 
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
@@ -37,17 +40,8 @@ public class produce {
         String bb = "hello world";
 
         for (int i = 0; i < 20; i++) {
-            channel.basicPublish(a,b,true, MessageProperties.PERSISTENT_TEXT_PLAIN, (bb+i).getBytes());
-
-            channel.addReturnListener(new ReturnListener() {
-                public void handleReturn(final int i, final String s, final String s1, final String s2, final AMQP.BasicProperties basicProperties, final byte[] bytes) throws IOException {
-                    final String s3 = new String(bytes);
-                    System.out.println(s3);
-
-                }
-            });
-
-                    TimeUnit.MILLISECONDS.sleep(500);
+            channel.basicPublish(a, b, MessageProperties.PERSISTENT_TEXT_PLAIN, (bb+i).getBytes());
+            TimeUnit.MILLISECONDS.sleep(500);
 
         }
 
