@@ -134,18 +134,13 @@ public class Producer {
         channel.queueDeclare("dxlQueue", true, false, false, dxlMap);
         channel.queueBind("dxlQueue", "dxlExchange", "normalKey");
         pushMessage("ttlExchange","normalKey","ttl");
-        channel.basicPublish("ttlExchange", "ss", new AMQP.BasicProperties().builder().expiration("20000").build(), "hxhxh".getBytes());\
+        channel.basicPublish("ttlExchange", "ss", new AMQP.BasicProperties().builder().expiration("20000").build(), "hxhxh".getBytes());
 
     }
 
 
     /**
-     * @return ${return_type}    返回类型
-     * @throws
-     * @Author:He_xixiang
-     * @Title: ${enclosing_method}
-     * @Description: 备份交换器
-     * @date: $DATE
+     *  备份交换器
      */
     @Test
     public void alternate_exchange() throws IOException {
